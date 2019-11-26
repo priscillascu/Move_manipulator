@@ -22,18 +22,74 @@
         <joint name="elbow_joint" value="0" />
         <joint name="shoulder_lift_joint" value="0" />
         <joint name="shoulder_pan_joint" value="0" />
-        <joint name="wrist_1_joint" value="0" />
+        <joint name="wrist_1_joint" value="-1.57" />
+        <joint name="wrist_2_joint" value="0" />
+        <joint name="wrist_3_joint" value="0" />
+    </group_state>
+    <group_state name="ready" group="arm">
+        <joint name="elbow_joint" value="0.785" />
+        <joint name="shoulder_lift_joint" value="-0.785" />
+        <joint name="shoulder_pan_joint" value="0" />
+        <joint name="wrist_1_joint" value="-1.57" />
         <joint name="wrist_2_joint" value="0" />
         <joint name="wrist_3_joint" value="0" />
     </group_state>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
-    <disable_collisions link1="base_link" link2="shoulder_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="caster_wheel_back" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="caster_wheel_front" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="hokuyo_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="left_back_wheel" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="left_front_wheel" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="right_back_wheel" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="right_front_wheel" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="shoulder_link" reason="Never" />
+    <disable_collisions link1="base_link" link2="ur5_base_link" reason="Adjacent" />
+    <disable_collisions link1="caster_wheel_back" link2="caster_wheel_front" reason="Never" />
+    <disable_collisions link1="caster_wheel_back" link2="hokuyo_link" reason="Never" />
+    <disable_collisions link1="caster_wheel_back" link2="left_back_wheel" reason="Never" />
+    <disable_collisions link1="caster_wheel_back" link2="left_front_wheel" reason="Never" />
+    <disable_collisions link1="caster_wheel_back" link2="right_back_wheel" reason="Never" />
+    <disable_collisions link1="caster_wheel_back" link2="right_front_wheel" reason="Never" />
+    <disable_collisions link1="caster_wheel_back" link2="shoulder_link" reason="Never" />
+    <disable_collisions link1="caster_wheel_back" link2="upper_arm_link" reason="Never" />
+    <disable_collisions link1="caster_wheel_back" link2="ur5_base_link" reason="Never" />
+    <disable_collisions link1="caster_wheel_front" link2="hokuyo_link" reason="Never" />
+    <disable_collisions link1="caster_wheel_front" link2="left_back_wheel" reason="Never" />
+    <disable_collisions link1="caster_wheel_front" link2="left_front_wheel" reason="Never" />
+    <disable_collisions link1="caster_wheel_front" link2="right_back_wheel" reason="Never" />
+    <disable_collisions link1="caster_wheel_front" link2="right_front_wheel" reason="Never" />
+    <disable_collisions link1="caster_wheel_front" link2="shoulder_link" reason="Never" />
+    <disable_collisions link1="caster_wheel_front" link2="ur5_base_link" reason="Never" />
+    <disable_collisions link1="ee_link" link2="left_front_wheel" reason="Never" />
     <disable_collisions link1="ee_link" link2="wrist_1_link" reason="Never" />
     <disable_collisions link1="ee_link" link2="wrist_2_link" reason="Never" />
     <disable_collisions link1="ee_link" link2="wrist_3_link" reason="Adjacent" />
     <disable_collisions link1="forearm_link" link2="upper_arm_link" reason="Adjacent" />
     <disable_collisions link1="forearm_link" link2="wrist_1_link" reason="Adjacent" />
+    <disable_collisions link1="hokuyo_link" link2="left_back_wheel" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="left_front_wheel" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="right_back_wheel" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="right_front_wheel" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="shoulder_link" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="ur5_base_link" reason="Never" />
+    <disable_collisions link1="left_back_wheel" link2="left_front_wheel" reason="Never" />
+    <disable_collisions link1="left_back_wheel" link2="right_back_wheel" reason="Never" />
+    <disable_collisions link1="left_back_wheel" link2="right_front_wheel" reason="Never" />
+    <disable_collisions link1="left_back_wheel" link2="shoulder_link" reason="Never" />
+    <disable_collisions link1="left_back_wheel" link2="upper_arm_link" reason="Never" />
+    <disable_collisions link1="left_back_wheel" link2="ur5_base_link" reason="Never" />
+    <disable_collisions link1="left_front_wheel" link2="right_back_wheel" reason="Never" />
+    <disable_collisions link1="left_front_wheel" link2="right_front_wheel" reason="Never" />
+    <disable_collisions link1="left_front_wheel" link2="shoulder_link" reason="Never" />
+    <disable_collisions link1="left_front_wheel" link2="ur5_base_link" reason="Never" />
+    <disable_collisions link1="right_back_wheel" link2="right_front_wheel" reason="Never" />
+    <disable_collisions link1="right_back_wheel" link2="shoulder_link" reason="Never" />
+    <disable_collisions link1="right_back_wheel" link2="upper_arm_link" reason="Never" />
+    <disable_collisions link1="right_back_wheel" link2="ur5_base_link" reason="Never" />
+    <disable_collisions link1="right_front_wheel" link2="shoulder_link" reason="Never" />
+    <disable_collisions link1="right_front_wheel" link2="ur5_base_link" reason="Never" />
     <disable_collisions link1="shoulder_link" link2="upper_arm_link" reason="Adjacent" />
+    <disable_collisions link1="shoulder_link" link2="ur5_base_link" reason="Adjacent" />
     <disable_collisions link1="wrist_1_link" link2="wrist_2_link" reason="Adjacent" />
     <disable_collisions link1="wrist_1_link" link2="wrist_3_link" reason="Never" />
     <disable_collisions link1="wrist_2_link" link2="wrist_3_link" reason="Adjacent" />
