@@ -50,6 +50,8 @@ double RPY2qua::getQua_w(void)
 //每当修改，都要重新catkin_make
 int main(int argc, char **argv)
 {
+    
+
     RPY2qua my_RPY2qua;
     ros::init(argc, argv, "draw_cricle");
     ros::NodeHandle node_handle;
@@ -57,7 +59,21 @@ int main(int argc, char **argv)
     spinner.start();
     sleep(2.0);
 
+    namespace rvt = rviz_visual_tools;
+    moveit_visual_tools::MoveItVisualTools visual_tools("base_link");
+    visual_tools.deleteAllMarkers();
+
+    Eigen::Affine3d text_pose = Eigen::Affine3d::Identity();
+    text_pose.translation().z() = 2.75; // above head of PR2
+    geometry_msgs::Vector3 scale;
+    scale.x=0.3;
+    scale.y=0.3;
+    scale.z=0.3;
+
     moveit::planning_interface::MoveGroupInterface group("arm");
+
+    const robot_state::JointModelGroup* joint_model_group =
+    group.getCurrentState()->getJointModelGroup("arm");
 
     std::string reference_frame = "base_link";
     group.setPoseReferenceFrame(reference_frame);
@@ -109,8 +125,62 @@ int main(int argc, char **argv)
     float centerY = start_pose.position.y;
     float centerZ = start_pose.position.z;
     
-    target_pose.position.y = centerY + 0.1;
-    waypoints.push_back(target_pose);
+    float wang[11][3] = 
+    {
+        {0.1, 0, 0.1},
+        {-0.1, 0 , 0.1},
+        
+        {0.05, -0.05, 0},
+        {0.05, -0.05, 0.1},
+        {-0.05, -0.05, 0.1},
+
+        {0.1, -0.1, 0},
+        {0.1, -0.1, 0.1},
+        {-0.1, -0.1, 0.1},
+
+        {0, 0, 0},
+        {0, 0, 0.1},
+        {0, -0.1, 0.1},
+    };
+
+    float yang[23][3] = 
+    {
+        {0.1, 0, 0.1},
+        {-0.1, 0, 0.1},
+        {0, 0.1, 0},
+
+        {0, 0.1, 0.1},
+        {0, -0.2, 0.1},
+        {0, 0, 0},
+
+        {0, 0, 0.1},
+        {0.1, -0.17, 0.1},
+        {0, 0, 0},
+
+        {0, 0, 0.1},
+        {-0.1, -0.1, 0.1},
+
+        {-0.1, 0.1, 0},
+        {-0.1, 0.1, 0.1},
+        {-0.2, 0.1, 0.1},
+        {-0.1, 0, 0.1},
+        {-0.25, 0, 0.1},
+        {-0.25, -0.2, 0.1},
+        {-0.175, 0, 0},
+        {-0.175, 0, 0.1},
+        {-0.1, -0.1, 0.1},
+        {-0.175, -0.05, 0},
+        {-0.175, -0.05, 0.1},
+        {-0.1, -0.15, 0.1},
+    };
+    for(int i = 0; i < 23; i++)
+    {
+        target_pose.position.x = centerX + yang[i][0];
+        target_pose.position.y = centerY + yang[i][2];
+        target_pose.position.z = centerZ + yang[i][1];
+        waypoints.push_back(target_pose);
+    }
+    
     target_pose = start_pose;
     waypoints.push_back(target_pose);
 
@@ -140,14 +210,19 @@ int main(int argc, char **argv)
  
 	    // 执行运动
 	    group.execute(plan);
+        ROS_INFO_NAMED("tutorial", "Visualizing plan 1 as trajectory line");
+        visual_tools.deleteAllMarkers();
+       // visual_tools.publishText(text_pose, "Pose Goal", rvt::WHITE, scale);//rvt::XLARGE);
+        visual_tools.publishPath(waypoints, rvt::LIME_GREEN, rvt::SMALL);
+       // for (std::size_t i = 0; i < waypoints.size(); ++i)
+           // visual_tools.publishAxisLabeled(waypoints[i], "pt" + std::to_string(i), rvt::SMALL);
+       visual_tools.trigger();
         sleep(1);
     }
     else
     {
         ROS_INFO("Path planning failed with only %0.6f success after %d attempts.", fraction, maxtries);
     }
-
-
 
     sleep(2.0);
     ros::shutdown();
